@@ -12,38 +12,34 @@ function InscriptionForm({ onBack, onSubmit }) {
     onSubmit({ prenom, nom, email, password });
   };
 
-  const inscription = () => {
+  const inscription = async () => {
     console.log("inscription");
-    fetch('https://facebookprojet-production.up.railway.app/api/register', {
-      method: 'POST',
-      body: JSON.stringify({ prenom, nom, email, password }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(async (response) => {
+
+    try {
+      const response = await fetch('https://facebookprojet-production.up.railway.app/api/register', {
+        method: 'POST',
+        body: JSON.stringify({ prenom, nom, email, password }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
       const data = await response.json();
       console.log(data);
-    if(!response.ok){
-      throw new Error(data.message || 'Inscription failed');
-      alert(data.message);  
+      
+      if (!response.ok) {
+        throw new Error(data.message || 'Inscription failed');     
+      }
+      
+      console.log('Inscription successful:', data);
+      alert(data.message);
       onSubmit();
-    }
+    } catch (error) { 
+      console.error('Inscription failed:', error.message);
+      alert(error.message);
+    }   
+  };
 
-    console.log('Inscription successful:', data);
-    alert(data.message);
-    window.location.href = '/connexion';
-  })
-  .catch(error => { 
-    console.error('Inscription failed:', error.message);
-    alert(error.message);
-  });
-}
-
-
-
-
-  
   return (
     <div className="inscription-form-container">
       <button className="fb-back" onClick={onBack}>← Retour</button>

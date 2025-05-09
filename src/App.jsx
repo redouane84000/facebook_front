@@ -15,7 +15,7 @@ function App() {
   }
 
   const handleInscription = (data) => {
-    setIsAuthenticated(true)
+    setIsAuthenticated(false)
     setView('connexion');
     
   }
