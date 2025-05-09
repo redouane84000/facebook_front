@@ -10,13 +10,14 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const handleConnexion = (credentials) => {
-    // Simulation d'authentification
     setIsAuthenticated(true)
+  
   }
 
   const handleInscription = (data) => {
-    // Simulation d'inscription
     setIsAuthenticated(true)
+    setView('connexion');
+    
   }
 
   if (isAuthenticated) {
