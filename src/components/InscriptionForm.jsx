@@ -14,7 +14,7 @@ function InscriptionForm({ onBack, onSubmit }) {
 
   const inscription = () => {
     console.log("inscription");
-    fetch('http://localhost:3000/api/register', {
+    fetch('https://facebookprojet-production.up.railway.app/api/register', {
       method: 'POST',
       body: JSON.stringify({ prenom, nom, email, password }),
       headers: {
